@@ -1,4 +1,4 @@
-# ProjectMerge
+# Project Merge
 Unify your codebase into a single, LLM-friendly file.
 
 ## Overview
