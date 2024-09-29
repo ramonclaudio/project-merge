@@ -27,38 +27,27 @@ include_patterns = {
     '.php', '.asp', '.jsp',
 
     # Backend Development
-    # Python
-    '.py',
-    # Ruby
-    '.rb',
-    # Java
-    '.java',
-    # C#
-    '.cs',
-    # Go
-    '.go',
-    # Rust
-    '.rs',
-    # Scala
-    '.scala',
-    # Kotlin
-    '.kt',
-    # Groovy
-    '.groovy',
-    # Clojure
-    '.clj',
-    # CoffeeScript
-    '.coffee',
-    # Elixir
-    '.ex', '.exs',
-    # Haskell
-    '.hs',
-    # Lua
-    '.lua',
-    # Perl
-    '.pl',
-    # R
-    '.r',
+    '.py',    # Python
+    '.rb',    # Ruby
+    '.java',  # Java
+    '.cs',    # C#
+    '.go',    # Go
+    '.rs',    # Rust
+    '.scala', # Scala
+    '.kt',    # Kotlin
+    '.groovy',# Groovy
+    '.clj',   # Clojure
+    '.coffee',# CoffeeScript
+    '.ex', '.exs',  # Elixir
+    '.hs',    # Haskell
+    '.lua',   # Lua
+    '.pl',    # Perl
+    '.r',     # R
+
+    # Systems Programming
+    '.c', '.cpp', '.h', '.hpp', '.cc', '.cxx',
+    '.m', '.mm',  # Objective-C
+    '.swift',
 
     # Data and Configuration
     '.json', '.xml', '.yaml', '.yml', '.toml', '.ini', '.conf', '.cfg',
@@ -69,25 +58,11 @@ include_patterns = {
     # Shell and Scripting
     '.sh', '.bash', '.zsh', '.fish', '.ps1', '.bat', '.cmd',
 
-    # Systems Programming
-    '.c', '.cpp', '.h', '.hpp', '.cc', '.cxx',
-    '.m', '.mm',  # Objective-C
-    '.swift',
-
     # Documentation
     '.md', '.markdown', '.txt', '.rst', '.tex',
 
     # Data Files
     '.csv', '.tsv',
-
-    # Other
-    '.proto',  # Protocol Buffers
-    '.dockerfile',
-    '.editorconfig',
-    '.htaccess',
-    '.nginx',
-    '.service',  # systemd service files
-    '.plist',    # property list files (macOS)
 
     # Project Configuration
     '.gitignore',
@@ -108,6 +83,17 @@ include_patterns = {
     '.travis.yml',
     '.gitlab-ci.yml',
     'Jenkinsfile',
+
+    # Server Configuration
+    '.htaccess',
+    '.nginx',
+    '.service',  # systemd service files
+
+    # Other
+    '.proto',  # Protocol Buffers
+    '.dockerfile',
+    '.editorconfig',
+    '.plist',    # property list files (macOS)
 }
 
 # Set of patterns to exclude from the merge process
@@ -132,10 +118,42 @@ exclude_patterns = {
     '.mypy_cache', '.dmypy.json', 'dmypy.json',
     '.pyre', '.pytype',
     'cython_debug',
+    'local_settings.py',
+    'celerybeat-schedule', 'celerybeat.pid',
 
     # JavaScript/Node.js
     'node_modules', 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml',
-    '.next',
+    '.next', 'out',
+    'npm-debug.log*', 'yarn-debug.log*', 'yarn-error.log*', 'lerna-debug.log*',
+    '.pnpm-debug.log*',
+    'report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json',
+    'pids', '*.seed', '*.pid.lock',
+    'lib-cov',
+    'coverage', '*.lcov',
+    '.nyc_output',
+    '.grunt',
+    'bower_components',
+    '.lock-wscript',
+    'build/Release',
+    'jspm_packages/',
+    'web_modules/',
+    '*.tsbuildinfo',
+    '.npm',
+    '.eslintcache',
+    '.stylelintcache',
+    '.rpt2_cache/', '.rts2_cache_cjs/', '.rts2_cache_es/', '.rts2_cache_umd/',
+    '.node_repl_history',
+    '*.tgz',
+    '.yarn-integrity',
+    '.cache', '.parcel-cache',
+    '.nuxt',
+    '.docusaurus',
+    '.serverless/',
+    '.fusebox/',
+    '.dynamodb/',
+    '.tern-port',
+    '.vscode-test',
+    '.yarn/cache', '.yarn/unplugged', '.yarn/build-state.yml', '.yarn/install-state.gz', '.pnp.*',
 
     # Ruby
     'Gemfile.lock',
@@ -147,17 +165,33 @@ exclude_patterns = {
     '*.o', '*.ko', '*.obj', '*.elf', '*.ilk', '*.map', '*.exp', '*.gch', '*.pch',
     '*.lib', '*.a', '*.la', '*.lo', '*.dll', '*.so', '*.so.*', '*.dylib',
 
+    # Swift and Xcode
+    'xcuserdata/',
+    '*.hmap',
+    '*.ipa',
+    '*.dSYM.zip',
+    '*.dSYM',
+    'timeline.xctimeline',
+    'playground.xcworkspace',
+    '.build/',
+    'Carthage/Build/',
+    'fastlane/report.xml',
+    'fastlane/Preview.html',
+    'fastlane/screenshots/**/*.png',
+    'fastlane/test_output',
+
     # IDEs and Editors
-    '.idea', '.vscode', '.cursorignore', '.cursorrules'
+    '.idea', '.vscode', '.cursorignore', '.cursorrules',
+    '.spyderproject', '.spyproject', '.ropeproject',
 
     # Version Control
     '.git', '.github',
 
     # Databases
-    '*.sqlite', '*.db',
+    '*.sqlite', '*.db', 'db.sqlite3', 'db.sqlite3-journal',
 
     # Logs and Temporary Files
-    '*.log', '*.tmp', '*.temp', '*.swp', '*.bak', '*.pid',
+    'logs', '*.log', '*.tmp', '*.temp', '*.swp', '*.bak', '*.pid',
 
     # OS-specific
     '.DS_Store', 'Thumbs.db',
@@ -166,7 +200,8 @@ exclude_patterns = {
     'build', 'dist', 'target', 'out',
 
     # Environment and Configuration
-    '.env*', '.venv', 'env', 'venv', 'ENV',
+    '.env', '.env*', '.env.development.local', '.env.test.local', '.env.production.local', '.env.local',
+    '.venv', 'env', 'venv', 'ENV',
 
     # Documentation
     'docs/_build', '/site',
@@ -179,15 +214,25 @@ exclude_patterns = {
 
     # Web Development
     '.webassets-cache',
+    '.vuepress/dist',
+    '.temp',
 
-    # Task Runners and Build Tools
-    'celerybeat-schedule', 'celerybeat.pid',
+    # Web Scraping
+    '.scrapy',
+
+    # Docker
+    'Dockerfile',
+
+    # Flask
+    'instance',
+
+    # Licensing
+    'LICENSE',
+
+    # Other
+    '.cache',
+    'dist',
 
     # Custom Directories
     '/dev',
-
-    # Other
-    'LICENSE', 'local_settings.py', 'db.sqlite3', 'db.sqlite3-journal',
-    '.spyderproject', '.spyproject', '.ropeproject', 'instance',
-    '.scrapy', 'Dockerfile'
 }
