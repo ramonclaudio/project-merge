@@ -18,7 +18,7 @@ custom_output_path = None
 # GitHub URL (set to None if not using)
 default_github_url = None
 
-# Set of file extensions to include in the code merge process
+# Set of patterns to include in the code merge process
 include_patterns = {
     # Web Development
     '.html', '.htm', '.css', '.scss', '.sass', '.less',
