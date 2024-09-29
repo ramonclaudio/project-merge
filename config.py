@@ -5,7 +5,11 @@ current_dir = Path(__file__).parent.resolve()
 
 # Default paths for input and output
 # These paths are used if no command-line arguments are provided
+
+# Default input path (set to None if not using)
 default_input_path = None
+
+# Default output path if custom output path is not provided
 default_output_path = current_dir / "merged-files"
 
 # Custom output path (set to None if not using)
