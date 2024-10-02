@@ -170,6 +170,7 @@ cython_debug/
 .cursorrules
 
 # Project specific
-/dev/
+.private/
 /temp_repo/
 /merged-files/
+/dev/
