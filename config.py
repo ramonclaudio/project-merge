@@ -24,7 +24,7 @@ include_patterns = {
     '.html', '.htm', '.css', '.scss', '.sass', '.less',
     '.js', '.ts', '.jsx', '.tsx',
     '.vue', '.svelte',
-    '.php', '.asp', '.jsp',
+    '.php', '.asp', '.jsp', '.mjs',
 
     # Backend Development
     '.py',    # Python
@@ -234,5 +234,8 @@ exclude_patterns = {
     'dist',
 
     # Custom Directories
-    '/dev',
+    '.private',
+    'dev',
+    'merged-files',
+    'temp_repo',
 }
