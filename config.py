@@ -166,7 +166,12 @@ exclude_patterns = {
     '*.lib', '*.a', '*.la', '*.lo', '*.dll', '*.so', '*.so.*', '*.dylib',
 
     # Swift and Xcode
+    'Info.plist',
+    'Preview Content',
     'xcuserdata/',
+    '*.xcassets',
+    '*.xcodeproj',
+    '*.pbxproj',
     '*.hmap',
     '*.ipa',
     '*.dSYM.zip',
@@ -233,7 +238,11 @@ exclude_patterns = {
     '.cache',
     'dist',
 
-    # Custom Directories
+    # Firebase
+    'GoogleService-Info.plist',
+    'firebase-debug.log',
+
+     # Custom Directories
     '.private',
     'dev',
     'merged-files',
