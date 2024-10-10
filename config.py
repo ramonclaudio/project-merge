@@ -244,7 +244,6 @@ exclude_patterns = {
 
      # Custom Directories
     '.private',
-    'dev',
     'merged-files',
     'temp_repo',
 }
