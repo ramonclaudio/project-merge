@@ -131,11 +131,6 @@ def main():
 
     input_dir = args.input_dir or config['default_input_path']
     github_url = args.github_url or config.get('default_github_url')
-    
-    if input_dir:
-        root_dir = os.path.basename(input_dir)
-    elif github_url:
-        repo_name = get_repo_name_from_url(github_url)
 
     output_dir = Path(args.output_dir).resolve() if args.output_dir else Path(config['default_output_path']).resolve() if config['custom_output_path'] else Path(config['default_output_path']).resolve() if config['custom_output_path'] else Path(config['default_output_path']).resolve()
 
