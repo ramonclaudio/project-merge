@@ -7,6 +7,11 @@ import subprocess
 import importlib.util
 from pathlib import Path
 from datetime import datetime
+from dotenv import load_dotenv
+
+load_dotenv()
+
+github_token = os.getenv('GITHUB_ACCESS_TOKEN')
 
 def load_config(config_path):
     spec = importlib.util.spec_from_file_location("config", config_path)
@@ -47,8 +52,10 @@ def process_directory(directory_path, combined_content, config):
                 combined_content += "\n```"
     return combined_content
 
-def clone_github_repo(url, temp_dir):
+def clone_github_repo(url, temp_dir, github_token=None):
     try:
+        if github_token:
+            url = url.replace('https://', f'https://{github_token}@')
         subprocess.run(['git', 'clone', url, temp_dir], check=True, capture_output=True)
         return temp_dir
     except subprocess.CalledProcessError as e:
@@ -125,12 +132,12 @@ def main():
     input_dir = args.input_dir or config['default_input_path']
     github_url = args.github_url or config.get('default_github_url')
     
-    if args.output_dir:
-        output_dir = Path(args.output_dir).resolve()
-    elif config['custom_output_path']:
-        output_dir = Path(config['custom_output_path']).resolve()
-    else:
-        output_dir = Path(config['default_output_path']).resolve()
+    if input_dir:
+        root_dir = os.path.basename(input_dir)
+    elif github_url:
+        repo_name = get_repo_name_from_url(github_url)
+
+    output_dir = Path(args.output_dir).resolve() if args.output_dir else Path(config['default_output_path']).resolve() if config['custom_output_path'] else Path(config['default_output_path']).resolve() if config['custom_output_path'] else Path(config['default_output_path']).resolve()
 
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -141,7 +148,7 @@ def main():
             temp_dir = script_dir / "temp_repo"
             try:
                 temp_dir.mkdir(exist_ok=True)
-                input_path = Path(clone_github_repo(github_url, str(temp_dir)))
+                input_path = Path(clone_github_repo(github_url, str(temp_dir), github_token))
                 root_folder_name = get_repo_name_from_url(github_url)
             except Exception as e:
                 print(f"Failed to process GitHub repository: {e}")
