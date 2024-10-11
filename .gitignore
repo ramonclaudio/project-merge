@@ -171,5 +171,5 @@ cython_debug/
 
 # Custom Directories
 .private/
-/temp_repo/
-/merged-files/
+temp_repo/
+merged-files/
