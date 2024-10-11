@@ -184,6 +184,8 @@ exclude_patterns = {
     'fastlane/Preview.html',
     'fastlane/screenshots/**/*.png',
     'fastlane/test_output',
+    '*Tests',
+    '*UITests',
 
     # IDEs and Editors
     '.idea', '.vscode', '.cursorignore', '.cursorrules',
