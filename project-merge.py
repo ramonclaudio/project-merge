@@ -56,8 +56,10 @@ def clone_github_repo(url, temp_dir, github_token=None):
     try:
         if github_token:
             url = url.replace('https://', f'https://{github_token}@')
-        subprocess.run(['git', 'clone', url, temp_dir], check=True, capture_output=True)
-        return temp_dir
+        repo_name = get_repo_name_from_url(url)
+        clone_path = os.path.join(temp_dir, repo_name)
+        subprocess.run(['git', 'clone', url, clone_path], check=True, capture_output=True)
+        return clone_path
     except subprocess.CalledProcessError as e:
         print(f"Error cloning repository: {e}")
         raise
@@ -144,7 +146,7 @@ def main():
             try:
                 temp_dir.mkdir(exist_ok=True)
                 input_path = Path(clone_github_repo(github_url, str(temp_dir), github_token))
-                root_folder_name = get_repo_name_from_url(github_url)
+                root_folder_name = input_path.name
             except Exception as e:
                 print(f"Failed to process GitHub repository: {e}")
                 return
