@@ -123,20 +123,19 @@ def create_directory_tree(directory_path, config):
 
 def main():
     parser = argparse.ArgumentParser(description="Unify your codebase into a single, LLM-friendly file.")
-    parser.add_argument("--config", default="config.py", help="Path to the Python configuration file")
-    parser.add_argument("--input_dir", help="Path to the directory containing the code files")
-    parser.add_argument("--output_dir", help="Path to the output directory")
+    parser.add_argument("--input_path", help="Path to the directory containing the code files")
+    parser.add_argument("--output_path", help="Path to the output directory (default: merged-files)")
     parser.add_argument("--github_url", help="URL of the GitHub repository to process")
     args = parser.parse_args()
 
-    config = load_config(args.config)
+    config = load_config("config.py")
 
-    input_dir = args.input_dir or config['default_input_path']
+    input_path = args.input_path or config['default_input_path']
     github_url = args.github_url or config.get('default_github_url')
 
-    output_dir = Path(args.output_dir).resolve() if args.output_dir else Path(config['default_output_path']).resolve() if config['custom_output_path'] else Path(config['default_output_path']).resolve() if config['custom_output_path'] else Path(config['default_output_path']).resolve()
+    output_path = Path(args.output_path).resolve() if args.output_path else Path(config['default_output_path']).resolve() if config['custom_output_path'] else Path(config['default_output_path']).resolve() if config['custom_output_path'] else Path(config['default_output_path']).resolve()
 
-    output_dir.mkdir(parents=True, exist_ok=True)
+    output_path.mkdir(parents=True, exist_ok=True)
 
     temp_dir = None
     try:
@@ -150,8 +149,8 @@ def main():
             except Exception as e:
                 print(f"Failed to process GitHub repository: {e}")
                 return
-        elif input_dir:
-            input_path = Path(input_dir).resolve()
+        elif input_path:
+            input_path = Path(input_path).resolve()
             root_folder_name = input_path.name
         else:
             print("Error: No input directory or GitHub URL specified in config or command-line arguments.")
@@ -163,7 +162,7 @@ def main():
 
         timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         output_file_name = f"{root_folder_name}_{timestamp}.md"
-        output_file = output_dir / output_file_name
+        output_file = output_path / output_file_name
 
         directory_tree = create_directory_tree(str(input_path), config)
 
